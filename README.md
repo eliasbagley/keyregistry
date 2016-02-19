@@ -2,16 +2,21 @@ Blockchain address: `TODO`
 
 ## Key Registry
 
-Key Registry is a Ethereum contract which allows for registering a unique name with a encryption public key.
+Key Registry is a Ethereum contract which allows for registering a unique name with a public key.
 
 ## Interface
 
 ```
 function isSet(string name) returns (bool) // returns whether or not this name has already been registered
+
 function registerPublicKey(string name, string key) returns (bool) // returns wheter or not the operation is successful
+
 function updatePublicKey(string name, string key) returns (bool) // only the owner of a key can update it
+
 function getPublicKey(string name) returns (string) // returns 0 if unset
+
 function getAddress(string name) returns (address) // returns 0 if unset
+
 ```
 
 ## LICENSE

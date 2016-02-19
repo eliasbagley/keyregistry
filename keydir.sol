@@ -8,11 +8,11 @@ struct Entity {
   address addr:
 }
 
-contract KeyDirectory {
+contract PublicKeyRegistry {
   address owner;
   mapping (string => Entity) keys;
 
-  function KeyDirectory() {
+  function PublicKeyRegistry() {
     owner = msg.sender;
   }
 

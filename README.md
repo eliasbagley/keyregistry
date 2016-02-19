@@ -1,3 +1,5 @@
+Blockchain address: `TODO`
+
 ## Key Dir
 
 Key Dir is a Ethereum contract which allows for registering a unique name with a public encryption key.
@@ -6,8 +8,8 @@ Key Dir is a Ethereum contract which allows for registering a unique name with a
 
 ```
 function isSet(string name) returns (bool)
-function register(string name, string key) returns (bool)
-function update(string name, string key) returns (bool)
+function registerPublicKey(string name, string key) returns (bool)
+function updatePublicKey(string name, string key) returns (bool)
 function getPublicKey(string name) returns (string)
 function getAddress(string name) returns (address)
 ```

@@ -1,3 +1,7 @@
+// TODO add private modifiers
+// TODO test
+// TODO deploy to the blockchain
+
 struct Entity {
   string name;
   string publicKey;
@@ -12,13 +16,13 @@ contract KeyDirectory {
     owner = msg.sender;
   }
 
-  // public
+  // public functions
 
   function isSet(string name) returns (bool) {
     return key[name] != 0;
   }
 
-  function update(string name, string key) returns (bool) {
+  function updatePublicKey(string name, string key) returns (bool) {
     if (isSet(name)) {
       Entity e = keys[name];
 
@@ -33,7 +37,7 @@ contract KeyDirectory {
     return false;
   }
 
-  function register(string name, string key) returns (bool) {
+  function registerPublicKey(string name, string key) returns (bool) {
     } else {
       // This name isn't taken. Create a new entity
       Entity e = Entity(name, key, msg.sender);
@@ -49,7 +53,7 @@ contract KeyDirectory {
       return keys[name].publicKey;
     }
 
-    return 0; //or throw?
+    return 0;
   }
 
   function getAddress(string name) returns (address) {
@@ -60,9 +64,9 @@ contract KeyDirectory {
     return 0;
   }
 
-  //private
+  // private functions
 
-  // helper
+  // helper functions
 
   function kill() {
     if (msg.sender == owner) {

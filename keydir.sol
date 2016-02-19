@@ -18,8 +18,24 @@ contract KeyDirectory {
     return key[name] != 0;
   }
 
+  function update(string name, string key) returns (bool) {
+    if (isSet(name)) {
+      Entity e = keys[name];
+
+      // If the addresses match, update the entity
+      if (msg.sender == e.addr) {
+        e.publicKey = key;
+        e.name = name;
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   function register(string name, string key) returns (bool) {
-    if (keys[name] == 0) {
+    } else {
+      // This name isn't taken. Create a new entity
       Entity e = Entity(name, key, msg.sender);
       keys[name] = e;
       return true;

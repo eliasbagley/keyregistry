@@ -1,16 +1,16 @@
-// TODO add private modifiers
 // TODO test
 // TODO deploy to the blockchain
 
-struct Entity {
-  string name;
-  string publicKey;
-  address addr:
-}
-
 contract PublicKeyRegistry {
-  address owner;
-  mapping (string => Entity) keys;
+    struct Entity {
+        string name;
+        string publicKey;
+        address addr;
+    }
+
+  address private owner;
+  mapping (string => Entity) private keys;
+  mapping (string => bool) private registered;
 
   function PublicKeyRegistry() {
     owner = msg.sender;
@@ -19,7 +19,7 @@ contract PublicKeyRegistry {
   // public functions
 
   function isSet(string name) returns (bool) {
-    return key[name] != 0;
+    return registered[name] == true;
   }
 
   function updatePublicKey(string name, string key) returns (bool) {
@@ -38,10 +38,11 @@ contract PublicKeyRegistry {
   }
 
   function registerPublicKey(string name, string key) returns (bool) {
-    } else {
+    if (!isSet(name)) {
       // This name isn't taken. Create a new entity
-      Entity e = Entity(name, key, msg.sender);
+      Entity memory e = Entity(name, key, msg.sender);
       keys[name] = e;
+      registered[name] = true;
       return true;
     }
 
@@ -53,7 +54,7 @@ contract PublicKeyRegistry {
       return keys[name].publicKey;
     }
 
-    return 0;
+    throw;
   }
 
   function getAddress(string name) returns (address) {
@@ -61,7 +62,7 @@ contract PublicKeyRegistry {
       return keys[name].addr;
     }
 
-    return 0;
+    throw;
   }
 
   // private functions
